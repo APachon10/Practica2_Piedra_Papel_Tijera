@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Random;
 
 public class Servidor {
+	static int eleccion_server;
 	public static void main(String[] args) throws IOException {
 		int puerto = 1234;
 		//Creamos el Socket Server con el puerto 1234
@@ -27,13 +28,14 @@ public class Servidor {
 		Random r = new Random(); 
 		
 		int contador=0,contador_server=0;
-		int i=0;
+		int i=1;
 		eleccion = dis.readInt();
+		Cliente_Jugador v = new Cliente_Jugador();
 		do {
-			int eleccion_server  =r.nextInt(3)+1;
 			System.out.println("Ronda : "+i);
-			System.out.println("Contador Server: "+contador_server);
-			System.out.println("Contador : "+contador);
+			System.out.println("========================================");
+			System.out.println("Servidor: "+contador_server +" ------------"+"Cliente:"+contador );
+			int eleccion_server = r.nextInt(3)+1;
 			if(eleccion >0 && eleccion <=3) {
 				switch (eleccion_server) {
 				case 1:
@@ -44,12 +46,10 @@ public class Servidor {
 					case 2:
 						System.out.println("El Servidor ha escogido Piedra ,Punto para el Servidor");
 						contador_server++;
-						i++;
 						break;
 					case 3:
 						System.out.println("El Servidor ha escogido Piedra ,Punto para el Jugador  ");
 						contador++;
-						i++;
 						break;
 					}
 					break;
@@ -58,7 +58,6 @@ public class Servidor {
 					case 1:
 						System.out.println("El Servidor ha escogido Papel ,Punto para el Servidor");
 						contador_server++;
-						i++;
 						break;
 					case 2:
 						System.out.println("El Servidor ha escogido Papel ,La Ronda queda en Empate ");
@@ -66,7 +65,6 @@ public class Servidor {
 					case 3:
 						System.out.println("El Servidor ha escogido Papel , Punto para el Jugador");
 						contador++;
-						i++;
 						break;
 					}
 					break;
@@ -75,12 +73,10 @@ public class Servidor {
 					case 1:
 						System.out.println("El servidor ha escogido Tijera,Punto para el Servidor ");
 						contador_server++;
-						i++;
 						break;
 					case 2:
 						System.out.println("El servidor ha escogido Tijera,Punto para el Jugador ");
 						contador++;
-						i++;
 						break;
 					case 3:
 						System.out.println("El servidor ha escogido Tijera, La ronda queda en Empate ");
@@ -88,12 +84,16 @@ public class Servidor {
 					}
 					break;
 				}
+				System.out.println("=================================================");
+				System.out.println("Servidor: "+contador_server +" ------------"+"Cliente:"+contador );
+				v.mainn();
+				i++;
 				//Cerramos los Stream y el Socket
 				dis.close();
 				dos.close(); 
 				socket.close();
 			}
-		}while(contador <=3 || contador_server<=3);
+		}while(contador <=3 && contador_server<=3);
 		
 	}
 }
