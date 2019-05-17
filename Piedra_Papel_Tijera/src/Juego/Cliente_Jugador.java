@@ -15,6 +15,7 @@ public class Cliente_Jugador {
 		DataInputStream dis = null;
 		DataOutputStream dos = null; 
 		//Bucle infinito
+		int puntos=0;
 		while(true) {
 			try {
 				//Creamos el Socket con el host y el puerto
@@ -30,7 +31,7 @@ public class Cliente_Jugador {
 				dos = new DataOutputStream(socket.getOutputStream());
 				dos.writeInt(numero);
 				int res = dis.readInt();
-				System.out.println( "Jugador = " + numero +", \tResultado = " +res);
+				System.out.println( " Eleccion Jugador: " + numero +", \tResultado Ronda: = " +res);
 				//Cerramos los Streams y el socket 
 				dis.close();
 				dos.close();

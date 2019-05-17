@@ -25,11 +25,15 @@ public class Servidor {
 		DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 		//El Servidor hace su Eleccion
 		Random r = new Random(); 
-		int eleccion_server  =r.nextInt(3)+1;
+		
 		int contador=0,contador_server=0;
 		int i=0;
+		eleccion = dis.readInt();
 		do {
+			int eleccion_server  =r.nextInt(3)+1;
 			System.out.println("Ronda : "+i);
+			System.out.println("Contador Server: "+contador_server);
+			System.out.println("Contador : "+contador);
 			if(eleccion >0 && eleccion <=3) {
 				switch (eleccion_server) {
 				case 1:
@@ -84,7 +88,12 @@ public class Servidor {
 					}
 					break;
 				}
+				//Cerramos los Stream y el Socket
+				dis.close();
+				dos.close(); 
+				socket.close();
 			}
-		}while(true);
+		}while(contador <=3 || contador_server<=3);
+		
 	}
 }
